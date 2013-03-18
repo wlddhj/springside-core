@@ -28,7 +28,18 @@ public class Encodes {
 
 	private static final String DEFAULT_URL_ENCODING = "UTF-8";
 	private static final char[] BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
+	private static final String key = "mo961811a1122";
 
+	public static String encode(String input) throws UnsupportedEncodingException {
+		String str = input + key;
+		return encodeHex(str.getBytes(DEFAULT_URL_ENCODING));
+	}
+
+	public static String decode(String input) throws UnsupportedEncodingException {
+		String str = new String(decodeHex(input), DEFAULT_URL_ENCODING);
+		String val = str.substring(0,str.indexOf(key));
+		return val;
+	}
 	/**
 	 * Hex编码.
 	 */

@@ -2,15 +2,26 @@ package org.springside.modules.utils;
 
 import static org.junit.Assert.*;
 
+import java.io.UnsupportedEncodingException;
+
 import org.junit.Test;
 
 public class EncodesTest {
-
 	@Test
-	public void hexEncode() {
-		String input = "haha,i am a very long message";
-		String result = Encodes.encodeHex(input.getBytes());
+	public void encode() throws UnsupportedEncodingException {
+		String input = "sandboxr00tm9";
+		String result = Encodes.encode(input);
+		System.out.println("encode>>>"+result);
+		System.out.println("input>>>"+input);
+		System.out.println("result>>>"+Encodes.decode(result));
+		assertEquals(input, Encodes.decode(result));
+	}
+	public void hexEncode() throws UnsupportedEncodingException {
+		String input = "sandboxr00tm9";
+		String result = Encodes.encodeHex(input.getBytes("utf-8"));
 		assertEquals(input, new String(Encodes.decodeHex(result)));
+		System.out.println(input+">>>"+result);
+		System.out.println("result>>>"+new String(Encodes.decodeHex(result)));
 	}
 
 	@Test
